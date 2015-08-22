@@ -6,6 +6,15 @@
  */
 
 module.exports = {
-	
+
+    top10: function(req,res){
+	Score.find({ where: { }, limit: 10, sort: 'points DESC' })
+	.exec(function(err, list){
+	    if(err) return res.send(400, err);
+
+	    return res.send(list)
+	});
+    }
+
 };
 
