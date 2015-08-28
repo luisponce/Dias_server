@@ -14,8 +14,13 @@ module.exports = {
       },
 
       points: {
-	  type: 'int',
+	  type: 'integer',
 	  required: true
+      },
+
+      email:{
+	  type: 'string'
+	  
       }
   }
 };
