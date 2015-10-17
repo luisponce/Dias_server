@@ -20,8 +20,8 @@ Module.expectedDataFileDownloads++;
     } else {
       throw 'using preloaded data can only be done on a web page or in a web worker';
     }
-    var PACKAGE_NAME = '1.1.5.data';
-    var REMOTE_PACKAGE_BASE = '1.1.5.data';
+    var PACKAGE_NAME = '1.1.7_7.data';
+    var REMOTE_PACKAGE_BASE = '1.1.7_7.data';
     if (typeof Module['locateFilePackage'] === 'function' && !Module['locateFile']) {
       Module['locateFile'] = Module['locateFilePackage'];
       Module.printErr('warning: you defined Module.locateFilePackage, that has been renamed to Module.locateFile (using your locateFilePackage for now)');
@@ -30,8 +30,8 @@ Module.expectedDataFileDownloads++;
                               Module['locateFile'](REMOTE_PACKAGE_BASE) :
                               ((Module['filePackagePrefixURL'] || '') + REMOTE_PACKAGE_BASE);
   
-      var REMOTE_PACKAGE_SIZE = 64738328;
-      var PACKAGE_UUID = '3964f2e3-68c7-4c61-bf01-002c4d4e608f';
+      var REMOTE_PACKAGE_SIZE = 65718437;
+      var PACKAGE_UUID = '0ad6c865-4e37-4acf-bd4c-28ae527bfbf0';
     
     function fetchRemotePackage(packageName, packageSize, callback, errback) {
       var xhr = new XMLHttpRequest();
@@ -78,16 +78,6 @@ Module.expectedDataFileDownloads++;
       console.error('package error:', error);
     };
   
-      var fetched = null, fetchedCallback = null;
-      fetchRemotePackage(REMOTE_PACKAGE_NAME, REMOTE_PACKAGE_SIZE, function(data) {
-        if (fetchedCallback) {
-          fetchedCallback(data);
-          fetchedCallback = null;
-        } else {
-          fetched = data;
-        }
-      }, handleError);
-    
   function runWithFS() {
 
     function assert(check, msg) {
@@ -132,26 +122,117 @@ Module['FS_createPath']('/', 'Resources', true, true);
       },
     };
 
-      new DataRequest(0, 37972, 0, 0).open('GET', '/level0');
-    new DataRequest(37972, 75292, 0, 0).open('GET', '/level1');
-    new DataRequest(75292, 101224, 0, 0).open('GET', '/level2');
-    new DataRequest(101224, 143784, 0, 0).open('GET', '/level3');
-    new DataRequest(143784, 180676, 0, 0).open('GET', '/level4');
-    new DataRequest(180676, 197276, 0, 0).open('GET', '/level5');
-    new DataRequest(197276, 236812, 0, 0).open('GET', '/mainData');
-    new DataRequest(236812, 238150, 0, 0).open('GET', '/methods_pointedto_by_uievents.xml');
-    new DataRequest(238150, 31406454, 0, 0).open('GET', '/sharedassets0.assets');
-    new DataRequest(31406454, 32888368, 0, 0).open('GET', '/sharedassets0.resource');
-    new DataRequest(32888368, 49138724, 0, 0).open('GET', '/sharedassets1.assets');
-    new DataRequest(49138724, 50559104, 0, 0).open('GET', '/sharedassets2.assets');
-    new DataRequest(50559104, 50913888, 0, 0).open('GET', '/sharedassets3.assets');
-    new DataRequest(50913888, 50919060, 0, 0).open('GET', '/sharedassets4.assets');
-    new DataRequest(50919060, 60705872, 0, 0).open('GET', '/sharedassets5.assets');
-    new DataRequest(60705872, 60710468, 0, 0).open('GET', '/sharedassets6.assets');
-    new DataRequest(60710468, 62328660, 0, 0).open('GET', '/Il2CppData/Metadata/global-metadata.dat');
-    new DataRequest(62328660, 64216044, 0, 0).open('GET', '/Resources/unity_default_resources');
-    new DataRequest(64216044, 64738328, 0, 0).open('GET', '/Resources/unity_builtin_extra');
+      new DataRequest(0, 38344, 0, 0).open('GET', '/level0');
+    new DataRequest(38344, 76012, 0, 0).open('GET', '/level1');
+    new DataRequest(76012, 104880, 0, 0).open('GET', '/level2');
+    new DataRequest(104880, 150844, 0, 0).open('GET', '/level3');
+    new DataRequest(150844, 188104, 0, 0).open('GET', '/level4');
+    new DataRequest(188104, 204704, 0, 0).open('GET', '/level5');
+    new DataRequest(204704, 228412, 0, 0).open('GET', '/level6');
+    new DataRequest(228412, 269524, 0, 0).open('GET', '/mainData');
+    new DataRequest(269524, 271077, 0, 0).open('GET', '/methods_pointedto_by_uievents.xml');
+    new DataRequest(271077, 32143021, 0, 0).open('GET', '/sharedassets0.assets');
+    new DataRequest(32143021, 33594765, 0, 0).open('GET', '/sharedassets0.resource');
+    new DataRequest(33594765, 49842993, 0, 0).open('GET', '/sharedassets1.assets');
+    new DataRequest(49842993, 50060485, 0, 0).open('GET', '/sharedassets1.resource');
+    new DataRequest(50060485, 51481041, 0, 0).open('GET', '/sharedassets2.assets');
+    new DataRequest(51481041, 51835849, 0, 0).open('GET', '/sharedassets3.assets');
+    new DataRequest(51835849, 51841317, 0, 0).open('GET', '/sharedassets4.assets');
+    new DataRequest(51841317, 61628313, 0, 0).open('GET', '/sharedassets5.assets');
+    new DataRequest(61628313, 61632909, 0, 0).open('GET', '/sharedassets6.assets');
+    new DataRequest(61632909, 61687633, 0, 0).open('GET', '/sharedassets7.assets');
+    new DataRequest(61687633, 63308769, 0, 0).open('GET', '/Il2CppData/Metadata/global-metadata.dat');
+    new DataRequest(63308769, 65196153, 0, 0).open('GET', '/Resources/unity_default_resources');
+    new DataRequest(65196153, 65718437, 0, 0).open('GET', '/Resources/unity_builtin_extra');
 
+      var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+      var IDB_RO = "readonly";
+      var IDB_RW = "readwrite";
+      var DB_NAME = 'EM_PRELOAD_CACHE';
+      var DB_VERSION = 1;
+      var METADATA_STORE_NAME = 'METADATA';
+      var PACKAGE_STORE_NAME = 'PACKAGES';
+      function openDatabase(callback, errback) {
+        try {
+          var openRequest = indexedDB.open(DB_NAME, DB_VERSION);
+        } catch (e) {
+          return errback(e);
+        }
+        openRequest.onupgradeneeded = function(event) {
+          var db = event.target.result;
+
+          if(db.objectStoreNames.contains(PACKAGE_STORE_NAME)) {
+            db.deleteObjectStore(PACKAGE_STORE_NAME);
+          }
+          var packages = db.createObjectStore(PACKAGE_STORE_NAME);
+
+          if(db.objectStoreNames.contains(METADATA_STORE_NAME)) {
+            db.deleteObjectStore(METADATA_STORE_NAME);
+          }
+          var metadata = db.createObjectStore(METADATA_STORE_NAME);
+        };
+        openRequest.onsuccess = function(event) {
+          var db = event.target.result;
+          callback(db);
+        };
+        openRequest.onerror = function(error) {
+          errback(error);
+        };
+      };
+
+      /* Check if there's a cached package, and if so whether it's the latest available */
+      function checkCachedPackage(db, packageName, callback, errback) {
+        var transaction = db.transaction([METADATA_STORE_NAME], IDB_RO);
+        var metadata = transaction.objectStore(METADATA_STORE_NAME);
+
+        var getRequest = metadata.get(packageName);
+        getRequest.onsuccess = function(event) {
+          var result = event.target.result;
+          if (!result) {
+            return callback(false);
+          } else {
+            return callback(PACKAGE_UUID === result.uuid);
+          }
+        };
+        getRequest.onerror = function(error) {
+          errback(error);
+        };
+      };
+
+      function fetchCachedPackage(db, packageName, callback, errback) {
+        var transaction = db.transaction([PACKAGE_STORE_NAME], IDB_RO);
+        var packages = transaction.objectStore(PACKAGE_STORE_NAME);
+
+        var getRequest = packages.get(packageName);
+        getRequest.onsuccess = function(event) {
+          var result = event.target.result;
+          callback(result);
+        };
+        getRequest.onerror = function(error) {
+          errback(error);
+        };
+      };
+
+      function cacheRemotePackage(db, packageName, packageData, packageMeta, callback, errback) {
+        var transaction = db.transaction([PACKAGE_STORE_NAME, METADATA_STORE_NAME], IDB_RW);
+        var packages = transaction.objectStore(PACKAGE_STORE_NAME);
+        var metadata = transaction.objectStore(METADATA_STORE_NAME);
+
+        var putPackageRequest = packages.put(packageData, packageName);
+        putPackageRequest.onsuccess = function(event) {
+          var putMetadataRequest = metadata.put(packageMeta, packageName);
+          putMetadataRequest.onsuccess = function(event) {
+            callback(packageData);
+          };
+          putMetadataRequest.onerror = function(error) {
+            errback(error);
+          };
+        };
+        putPackageRequest.onerror = function(error) {
+          errback(error);
+        };
+      };
+    
     function processPackageData(arrayBuffer) {
       Module.finishedDataFileDownloads++;
       assert(arrayBuffer, 'Loading data file failed.');
@@ -166,33 +247,61 @@ Module['FS_createPath']('/', 'Resources', true, true);
           DataRequest.prototype.requests["/level3"].onload();
           DataRequest.prototype.requests["/level4"].onload();
           DataRequest.prototype.requests["/level5"].onload();
+          DataRequest.prototype.requests["/level6"].onload();
           DataRequest.prototype.requests["/mainData"].onload();
           DataRequest.prototype.requests["/methods_pointedto_by_uievents.xml"].onload();
           DataRequest.prototype.requests["/sharedassets0.assets"].onload();
           DataRequest.prototype.requests["/sharedassets0.resource"].onload();
           DataRequest.prototype.requests["/sharedassets1.assets"].onload();
+          DataRequest.prototype.requests["/sharedassets1.resource"].onload();
           DataRequest.prototype.requests["/sharedassets2.assets"].onload();
           DataRequest.prototype.requests["/sharedassets3.assets"].onload();
           DataRequest.prototype.requests["/sharedassets4.assets"].onload();
           DataRequest.prototype.requests["/sharedassets5.assets"].onload();
           DataRequest.prototype.requests["/sharedassets6.assets"].onload();
+          DataRequest.prototype.requests["/sharedassets7.assets"].onload();
           DataRequest.prototype.requests["/Il2CppData/Metadata/global-metadata.dat"].onload();
           DataRequest.prototype.requests["/Resources/unity_default_resources"].onload();
           DataRequest.prototype.requests["/Resources/unity_builtin_extra"].onload();
-          Module['removeRunDependency']('datafile_1.1.5.data');
+          Module['removeRunDependency']('datafile_1.1.7_7.data');
 
     };
-    Module['addRunDependency']('datafile_1.1.5.data');
+    Module['addRunDependency']('datafile_1.1.7_7.data');
   
     if (!Module.preloadResults) Module.preloadResults = {};
   
-      Module.preloadResults[PACKAGE_NAME] = {fromCache: false};
-      if (fetched) {
-        processPackageData(fetched);
-        fetched = null;
-      } else {
-        fetchedCallback = processPackageData;
-      }
+      function preloadFallback(error) {
+        console.error(error);
+        console.error('falling back to default preload behavior');
+        fetchRemotePackage(REMOTE_PACKAGE_NAME, REMOTE_PACKAGE_SIZE, processPackageData, handleError);
+      };
+
+      openDatabase(
+        function(db) {
+          checkCachedPackage(db, PACKAGE_PATH + PACKAGE_NAME,
+            function(useCached) {
+              Module.preloadResults[PACKAGE_NAME] = {fromCache: useCached};
+              if (useCached) {
+                console.info('loading ' + PACKAGE_NAME + ' from cache');
+                fetchCachedPackage(db, PACKAGE_PATH + PACKAGE_NAME, processPackageData, preloadFallback);
+              } else {
+                console.info('loading ' + PACKAGE_NAME + ' from remote');
+                fetchRemotePackage(REMOTE_PACKAGE_NAME, REMOTE_PACKAGE_SIZE, 
+                  function(packageData) {
+                    cacheRemotePackage(db, PACKAGE_PATH + PACKAGE_NAME, packageData, {uuid:PACKAGE_UUID}, processPackageData,
+                      function(error) {
+                        console.error(error);
+                        processPackageData(packageData);
+                      });
+                  }
+                , preloadFallback);
+              }
+            }
+          , preloadFallback);
+        }
+      , preloadFallback);
+
+      if (Module['setStatus']) Module['setStatus']('Downloading...');
     
   }
   if (Module['calledRun']) {

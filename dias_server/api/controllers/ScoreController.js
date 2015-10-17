@@ -8,7 +8,13 @@
 module.exports = {
 
     top10: function(req,res){
-	Score.find({ where: { }, limit: 10, sort: 'points DESC' })
+	var page = req.query.page;
+
+	if(page == null){
+	    page = 0;
+	}
+
+	Score.find({ where: { }, limit: 10, skip: (page*10), sort: 'points DESC' })
 	.exec(function(err, list){
 	    if(err) return res.send(400, err);
 
